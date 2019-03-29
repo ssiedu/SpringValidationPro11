@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssi.dao.ServiceDAO;
@@ -17,25 +18,32 @@ public class ServiceController {
 	@Autowired
 	ServiceDAO serviceDAO;
 	
+	@RequestMapping("deleteservice")
+	public ModelAndView removeService(@RequestParam("scode") String code){
+		serviceDAO.removeService(code);
+		ModelAndView mv=new ModelAndView("redirect:viewallservices");
+		return mv;
+	}
+	
 	@RequestMapping("viewallservices")
 	public ModelAndView showServiceList(){
 		List<Service> list=serviceDAO.getAllServices();
-		ModelAndView mv=new ModelAndView("servicelist.jsp");
+		ModelAndView mv=new ModelAndView("servicelist");
 		mv.addObject("services", list);
 		return mv;
 	}
 	@RequestMapping("saveservice")
 	public ModelAndView saveServiceData(@ModelAttribute("service") Service service){
 		serviceDAO.addSerive(service);
-		ModelAndView mv=new ModelAndView("serviceentrysuccess.jsp");
+		ModelAndView mv=new ModelAndView("serviceentrysuccess");
 		return mv;
 	}
 	@RequestMapping("newservice")
 	public String showServiceEntryForm(){
-		return "serviceentry.jsp";
+		return "serviceentry";
 	}
 	@RequestMapping("adminhome")
 	public String showAdminHome(){
-		return "adminhome.jsp";
+		return "adminhome";
 	}
 }

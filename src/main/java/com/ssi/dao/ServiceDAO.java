@@ -17,6 +17,15 @@ public class ServiceDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 	
+	public void removeService(String code){
+		Session session=sessionFactory.openSession();
+		Transaction tr=session.beginTransaction();
+		Service service=new Service(); 
+		service.setScode(code);
+		session.delete(service);
+		tr.commit();
+		session.close();
+	}
 	public List<Service> getAllServices(){
 		Session session=sessionFactory.openSession();
 		Criteria cr=session.createCriteria(Service.class);
