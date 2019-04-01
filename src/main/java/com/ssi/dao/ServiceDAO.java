@@ -16,6 +16,14 @@ public class ServiceDAO {
 	
 	@Autowired
 	SessionFactory sessionFactory;
+
+	
+	public Service getServiceById(String scode){
+		Session session=sessionFactory.openSession();
+		Service service=session.get(Service.class, scode);
+		session.close();
+		return service;
+	}
 	
 	public void removeService(String code){
 		Session session=sessionFactory.openSession();
@@ -36,7 +44,7 @@ public class ServiceDAO {
 	public void addSerive(Service service){
 		Session session=sessionFactory.openSession();
 		Transaction tr=session.beginTransaction();
-		session.save(service);
+		session.saveOrUpdate(service);
 		tr.commit();
 		session.close();
 	}

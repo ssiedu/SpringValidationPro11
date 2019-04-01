@@ -27,5 +27,10 @@ public class Service {
 	public void setCharge(int charge) {
 		this.charge = charge;
 	}
+	@Override
+	public String toString() {
+		return "Service [scode=" + scode + ", sname=" + sname + ", charge="
+				+ charge + "]";
+	}
 	
 }

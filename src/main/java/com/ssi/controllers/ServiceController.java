@@ -18,6 +18,22 @@ public class ServiceController {
 	@Autowired
 	ServiceDAO serviceDAO;
 	
+	@RequestMapping("saveservicechanges")
+	public ModelAndView saveServiceChanges(@ModelAttribute("service") Service service){
+		serviceDAO.addSerive(service);
+		ModelAndView mv=new ModelAndView("redirect:viewallservices");
+		return mv;
+	}
+	
+	@RequestMapping("updateservice")
+	public ModelAndView showUpdateForm(@RequestParam("scode") String scode){
+	
+		Service service=serviceDAO.getServiceById(scode);
+		ModelAndView mv=new ModelAndView("serviceupdateform");
+		mv.addObject("service", service);
+		return mv;
+	}
+	
 	@RequestMapping("deleteservice")
 	public ModelAndView removeService(@RequestParam("scode") String code){
 		serviceDAO.removeService(code);
