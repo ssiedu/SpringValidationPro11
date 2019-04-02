@@ -1,20 +1,19 @@
+<%@page isELIgnored="false" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="fr" %>
+
 <html>
 <body>
 	<h3>Provider Registration</h3>
-	<form action="saveprovider">
+	<fr:form action="saveprovider" modelAttribute="provider">
 	<pre>
-		Email <input type="text" name="email"/>
-		Pswrd <input type="password" name="password"/>
-		Name  <input type="text" name="name"/>
-		Addr  <input type="text" name="address"/>
-		Mob.  <input type="text" name="mobile"/>
-		SrCd  <select name="service.scode">
-				<option value="s111">electrician</option>
-				<option value="s112">pumber</option>
-				<option value="s113">ac-mech</option>
-			  </select>
-			<input type="submit" value="Register"/>
+		Email <fr:input path="email"/>
+		Pswrd <fr:password path="password"/>
+		Name  <fr:input path="name"/>
+		Addr  <fr:input path="address"/>
+		Mob.  <fr:input path="mobile"/>
+		SrCd  <fr:select path="service.scode" items="${scodes}"/>  
+				<input type="submit" value="Register"/>
 			</pre>
-	</form>
+	</fr:form>
 </body>
 </html>

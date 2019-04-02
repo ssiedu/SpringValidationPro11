@@ -1,6 +1,9 @@
 package com.ssi.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -17,6 +20,34 @@ public class ServiceDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 
+	
+	public Map<String,String> getAllServiceCodeAndNameMap(){
+		
+		Map<String,String> serviceMap=new HashMap<String,String>();
+		Session session=sessionFactory.openSession();
+		Criteria cr=session.createCriteria(Service.class);
+		List<Service> serviceList=cr.list();
+		
+		for(Service service:serviceList){
+			String key=service.getScode();
+			String value=service.getSname();
+			serviceMap.put(key, value);
+		}
+		session.close();
+		return serviceMap;
+	}
+
+	public List<String> getAllServiceCodes(){
+		Session session=sessionFactory.openSession();
+		Criteria cr=session.createCriteria(Service.class);
+		List<Service> serviceList=cr.list();
+		List<String> list=new ArrayList<String>();
+		for(Service service:serviceList){
+			list.add(service.getScode());
+		}
+		session.close();
+		return list;
+	}
 	
 	public Service getServiceById(String scode){
 		Session session=sessionFactory.openSession();
