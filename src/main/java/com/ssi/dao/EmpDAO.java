@@ -6,18 +6,17 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ssi.entities.Provider;
+import com.ssi.entities.Emp;
 
 @Component
-public class ProviderDAO {
-
+public class EmpDAO {
 	@Autowired
-	SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
-	public void saveProvider(Provider provider){
+	public void saveEmp(Emp emp){
 		Session session=sessionFactory.openSession();
 		Transaction tr=session.beginTransaction();
-		session.save(provider);
+		session.save(emp);
 		tr.commit();
 		session.close();
 	}
