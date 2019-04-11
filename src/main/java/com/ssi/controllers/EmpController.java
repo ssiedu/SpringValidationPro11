@@ -1,5 +1,7 @@
 package com.ssi.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,7 +25,7 @@ public class EmpController {
 		return mv;
 	}
 	@RequestMapping("saveemp")
-	public ModelAndView saveEmpData(@ModelAttribute("emp") Emp emp, BindingResult result){
+	public ModelAndView saveEmpData(@Valid @ModelAttribute("emp") Emp emp, BindingResult result){
 		
 		if(result.hasErrors()){
 			//ModelAndView mv=new ModelAndView("errorpage");
@@ -31,7 +33,7 @@ public class EmpController {
 			return mv;
 		}
 		
-		dao.saveEmp(emp);
+		//dao.saveEmp(emp);
 		ModelAndView mv=new ModelAndView("success");
 		return mv;
 	}
